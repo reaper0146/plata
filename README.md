@@ -1,6 +1,6 @@
 ## Plata Ethereum Blockchain DApp
 
-This is an Ethereum-based DApp using IPFS. With this application users are able to sell and buy data using "ether". Data itself is stored on the InterPlanetary File Server (IPFS), a decentralized cloud storage platform.This application also requires the user to use the extenstion Metamask; one can download this extension at that the following site: https://metamask.io/
+This is an Ethereum-based DApp using IPFS. With this application users are able to sell and buy files (can be data files) using "ether". The file is stored on the InterPlanetary File Server (IPFS), a decentralized cloud storage platform. This application also requires the user to use the extenstion Metamask; one can download this extension at that the following site: https://metamask.io/
 
 ## For local development of frontend execute the following code:
 
@@ -13,7 +13,14 @@ This is an Ethereum-based DApp using IPFS. With this application users are able 
 cd /plata
 npm install
 
-4. Run on local machine
+4. Run Ganache
+
+5. Deploy contract to ganache network using below command
+    truffle migrate --network ganache  
+
+6. Import ganache accounts to metamask using the private key
+
+7. Run on local machine
 
 npm run dev
 
