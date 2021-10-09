@@ -10,17 +10,20 @@ This is an Ethereum-based DApp using IPFS. With this application users are able 
 
 3. Install necessary dependencies using npm
 
+```
 cd /plata
 npm install
+```
 
 4. Run Ganache
 
 5. Deploy contract to ganache network using below command
-    truffle migrate --network ganache  
-
+```
+truffle migrate --network ganache  
+```
 6. Import ganache accounts to metamask using the private key
 
 7. Run on local machine
-
+```
 npm run dev
-
+```
