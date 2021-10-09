@@ -5,11 +5,11 @@ This is an Ethereum-based DApp using IPFS. With this application users are able 
 ## For local development of frontend execute the following code:
 
 1. Download and install Ganache and metamask extension in suitable browser (chrome/firefox)
-```
+
 Ganche: https://www.trufflesuite.com/ganache
 
 Netmask: https://metamask.io/
-```
+
 2. Download the repository using git clone
 
 3. Install necessary dependencies using npm
