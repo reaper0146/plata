@@ -10,6 +10,7 @@ Ganche: https://www.trufflesuite.com/ganache
 
 Netmask: https://metamask.io/
 
+
 2. Download the repository using git clone
 
 3. Install necessary dependencies using npm
@@ -21,11 +22,15 @@ npm install
 
 4. Run Ganache
 
+See https://www.linkedin.com/pulse/using-ganache-ethereum-emulator-metamask-farhan-khan/
+
 5. Deploy contract to ganache network using below command
 ```
 truffle migrate --network ganache  
 ```
 6. Import ganache accounts to metamask using the private key
+
+There is a key symbol beside each account, click one of the account address and copy the private key. Now open MetaMask settings and click the option of import accounts. Inside the “Private Key” field, just paste the copied key information.
 
 7. Run on local machine
 ```
