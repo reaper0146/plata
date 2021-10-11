@@ -194,7 +194,7 @@ App = {
                 number++;    
                 console.log(number);
                 console.log(event)
-                console.log(transactionReceipt.receipt);
+                //console.log(transactionReceipt.receipt);
                 console.log(_articleId);
                 //if (number == _articleId){
                     console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
