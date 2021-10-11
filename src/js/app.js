@@ -187,11 +187,16 @@ App = {
                 console.log("transaction hash", hash);
 
                 var number = 0;
-                marketInstance.LogSellArticle({fromBlock: "0"}).on("data", async function(event) {
-                number++;    
-              //  console.log(number);
+                //console.log(number);
                 //console.log(_articleId);
-                if (number == _articleId){
+                //number = _articleId
+                marketInstance.LogBuyArticle({fromBlock: "0", toBlock: 'latest'}).on("data", async function(event) {
+                number++;    
+                console.log(number);
+                console.log(event)
+                console.log(transactionReceipt.receipt);
+                console.log(_articleId);
+                //if (number == _articleId){
                     console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
                     console.log(event.returnValues._name);
                     console.log(event.returnValues._seller);
@@ -199,9 +204,10 @@ App = {
                     $('#modal-loading').attr('hidden', false);
                     App.blurBackground();
 
-                } else {
-                    return
-                }});
+                //} else {
+                //    return
+            //    }
+            });
 
 
                 
