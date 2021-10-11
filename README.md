@@ -16,7 +16,7 @@ Netmask: https://metamask.io/
 3. Install necessary dependencies using npm
 
 ```
-cd /plata
+cd plata
 npm install
 ```
 
