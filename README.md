@@ -26,6 +26,7 @@ See https://www.linkedin.com/pulse/using-ganache-ethereum-emulator-metamask-farh
 
 5. Deploy contract to ganache network using below command
 ```
+npm install -g truffle
 truffle migrate --network ganache  
 ```
 6. Import ganache accounts to metamask using the private key
