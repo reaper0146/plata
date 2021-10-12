@@ -22,7 +22,6 @@ npm install
 
 4. Run Ganache
 
-See https://www.linkedin.com/pulse/using-ganache-ethereum-emulator-metamask-farhan-khan/
 
 5. Deploy contract to ganache network using below command
 ```
@@ -33,7 +32,14 @@ truffle migrate --network ganache
 
 There is a key symbol beside each account, click one of the account address and copy the private key. Now open MetaMask settings and click the option of import accounts. Inside the “Private Key” field, just paste the copied key information.
 
-7. Run on local machine
+7. Change metamask network to localhost 7545
+
+Click top right icon -> settings -> networks -> local host 8545 -> change name and port to 7545 -> save
+
+See similar details at https://www.linkedin.com/pulse/using-ganache-ethereum-emulator-metamask-farhan-khan/
+
+
+8. Run on local machine
 ```
 npm run dev
 ```
