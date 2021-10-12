@@ -118,7 +118,7 @@ App = {
         //const test = $('#hashvalue').text();
         const _hashvalue = $('#hashvalue1').text();
         console.log(_hashvalue)
-        console.log(test)
+        //console.log(test)
         
 
         if(_name.trim() == "" || _price === "0") {

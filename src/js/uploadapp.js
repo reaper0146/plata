@@ -1,13 +1,28 @@
 const IPFS = require('ipfs-mini');
 const CryptoJS = require("crypto-js");
 const ipfs = new IPFS({host: 'ipfs.infura.io', port: 5001, protocol: 'https'});
+const crypto = require('crypto');
 
-const encrypt = (text) => {
+var algorithm = 'aes-256-ctr';
+var password = 'd6F3Efeq';
+
+const encrypt1 = (text) => {
   return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
 };
 
-const decrypt = (data) => {
+const decrypt1 = (data) => {
   return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
+};
+
+const encrypt = (text) => {
+  var ciphertext = CryptoJS.AES.encrypt(text, 'secret key 123').toString();
+  return ciphertext;
+};
+
+const decrypt = (text) => {
+  var bytes  = CryptoJS.AES.decrypt(text, 'secret key 123');
+  var originalText = bytes.toString(CryptoJS.enc.Utf8);
+  return originalText;
 };
 
 uploadFile = () => {
@@ -31,7 +46,7 @@ uploadFile = () => {
       $('#ipfslinktitle').text('Your IPFS Link');
       $('#ipfslink').text('https://ipfs.infura.io/ipfs/' + hash);
       const hashenc = encrypt(hash)
-      console.log(test)
+      //console.log(test)
       console.log(hashenc)
       $('#hashvalue1').text(hashenc);
 
