@@ -115,8 +115,10 @@ App = {
         const _name = $('#article_name').val();
         const _description = $('#article_description').val();
         const _price = window.web3.utils.toWei(articlePrice, "ether");
-        const _hashvalue = $('#hashvalue').text();
+        //const test = $('#hashvalue').text();
+        const _hashvalue = $('#hashvalue1').text();
         console.log(_hashvalue)
+        console.log(test)
         
 
         if(_name.trim() == "" || _price === "0") {
@@ -187,7 +189,7 @@ App = {
                 console.log("transaction hash", hash);
 
                 var number = 0;
-                //console.log(number);
+                console.log(number);
                 //console.log(_articleId);
                 //number = _articleId
                 marketInstance.LogBuyArticle({fromBlock: "0", toBlock: 'latest'}).on("data", async function(event) {
@@ -200,7 +202,7 @@ App = {
                     console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
                     console.log(event.returnValues._name);
                     console.log(event.returnValues._seller);
-                    $('#purchaselink').text('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
+                    $('#purchaselink').text(event.returnValues._hashvalue);
                     $('#modal-loading').attr('hidden', false);
                     App.blurBackground();
 

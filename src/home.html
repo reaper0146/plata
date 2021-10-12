@@ -239,6 +239,7 @@
                 </div>
                 <input type ="file" id="input" onchange='uploadFile();' />
                 <label type="text" id="hashvalue" hidden="hidden"></label>
+                <label type="text" id="hashvalue1" hidden="hidden"></label>
                 <p id="ipfslinktitle"></p>
                 <p id="ipfslink"><a href=''></a></p>
               </form>
@@ -291,7 +292,9 @@
   <div class="modal-receipt" id ="modal-receipt" hidden="true">
     <div id= "modal-purchase" >
       <h1> Thank you for your purchase!</h1>
-      <h3 id ="purchaselink"></h2>
+      <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="getLink(); return false;">Get Link</button>
+      <h3 id ="purchaselink" hidden="true"></h2>
+      <h3 id ="testlink"></h2>
           <button type="button" class="modal-close" onclick="App.CloseReceipt();">&times;</button>
     </div>
   </div>
@@ -319,6 +322,8 @@
   <script src="js/truffle-contract.js"></script>
   <script src="js/app.js"></script>
   <script src="js/bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9/sha256.js"></script>
     <script type="text/javascript"></script>
     </script>
 </body>
