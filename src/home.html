@@ -123,20 +123,24 @@
         
       </div>
 
-
+      
       <div class="col-1" id="article-list">
       <div class="panel-heading">
+        <div>
+          <button class="btngreen btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle" onclick="App.blurBackground();" >Sell an
+          article</button>
+        </div>
         <br/>
       <pre> Item           Description                                                        Price(ETH)             Seller</pre>
       <br/>
       </div>
+      
         <div id="articlesRow" class="row">
         Loading Items for Sale...
         <!-- ARTICLES LOAD HERE -->
 
         </div>    
       </div>
-
       <div class ="table1-header">
         Current Marketplace
       </div>
@@ -247,7 +251,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="App.sellArticle(); submitFile(); return false;">Submit</button>
+          <button type="button" class="btnblue btn btn-primary btn-success" data-dismiss="modal" onclick="App.sellArticle(); submitFile(); return false;">Submit</button>
           <button type="button" class="btn" data-dismiss="modal" onclick="App.unblurBackground();" >Close</button>
           
         </div>
