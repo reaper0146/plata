@@ -16,11 +16,11 @@
 
 }
 
-.btngreen {
-    background-color: #4CAF50;
+.btnblue {
+    background-color: #008CBA;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -29,11 +29,24 @@
     cursor: pointer;
   }
 
-.btnblue {
+.btngreen {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 15px 32px;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.btnred {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 10px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -450,7 +463,7 @@ a:link {
     height: 600px;
     width: 650px;
     position: absolute;
-    left: 700px;
+    left: 400px;
     top:200px;
     background:white;
     transition: all 5s ease-in-out;
@@ -543,11 +556,9 @@ a:link {
   }
 
 .modal-close{
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    transition: all 200ms;
-    font-size: 30px;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
     font-weight: bold;
     text-decoration: none;
     color: #333;
