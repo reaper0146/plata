@@ -2,6 +2,8 @@
 
 This is an Ethereum-based DApp using IPFS. With this application users are able to sell and buy files (can be data files) using "ether". The file is stored on the InterPlanetary File Server (IPFS), a decentralized cloud storage platform. This application also requires the user to use the extenstion Metamask; one can download this extension at that the following site: https://metamask.io/
 
+Youtube: https://www.youtube.com/watch?v=_nVEWs2B1_I
+
 ## For local development of frontend execute the following code:
 
 1. Download and install Ganache and metamask extension in suitable browser (chrome/firefox)
