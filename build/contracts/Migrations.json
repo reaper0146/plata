@@ -74,7 +74,7 @@
   "sourceMap": "34:481:1:-;;;187:50;8:9:-1;5:2;;;30:1;27;20:12;5:2;187:50:1;222:10;214:5;;:18;;;;;;;;;;;;;;;;;;34:481;;;;;;",
   "deployedSourceMap": "34:481:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;34:481:1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;348:165;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;348:165:1;;;;;;;;;;;;;;;;;;;:::i;:::-;;82:36;;;:::i;:::-;;;;;;;;;;;;;;;;;;;58:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;241:103;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;241:103:1;;;;;;;;;;;;;;;;;:::i;:::-;;348:165;169:5;;;;;;;;;;;155:19;;:10;:19;;;151:26;;;410:19;443:11;410:45;;461:8;:21;;;483:24;;461:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;461:47:1;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;461:47:1;;;;176:1;151:26;348:165;:::o;82:36::-;;;;:::o;58:20::-;;;;;;;;;;;;;:::o;241:103::-;169:5;;;;;;;;;;;155:19;;:10;:19;;;151:26;;;330:9;303:24;:36;;;;151:26;241:103;:::o",
   "source": "pragma solidity >=0.4.21 <0.7.0;\n\ncontract Migrations {\n  address public owner;\n  uint public last_completed_migration;\n\n  modifier restricted() {\n    if (msg.sender == owner) _;\n  }\n\n\n  constructor() public {\n    owner = msg.sender;\n  }\n\n  function setCompleted(uint completed) public restricted {\n    last_completed_migration = completed;\n  }\n\n  function upgrade(address new_address) public restricted {\n    Migrations upgraded = Migrations(new_address);\n    upgraded.setCompleted(last_completed_migration);\n  }\n}\n",
-  "sourcePath": "/Users/reaper/Documents/plata/contracts/Migrations.sol",
+  "sourcePath": "/Users/reaper/Documents/plata1.0/contracts/Migrations.sol",
   "ast": {
     "absolutePath": "project:/contracts/Migrations.sol",
     "exportedSymbols": {
@@ -1475,8 +1475,8 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x58024135c275339f0468cF78F05714D107789bcB",
-      "transactionHash": "0x1a42cd9d0e7f8a86492371b58c162b680bf3892cc3f9b2f7ddc5cacd681c92cb"
+      "address": "0x5FdE73d2cFb299af0177C26D9f4aD2d663e20f09",
+      "transactionHash": "0x0e9336e825c5718bc6014f83006f9207a3f22534d93867094c00076295215391"
     },
     "1633267316770": {
       "events": {},
@@ -1486,7 +1486,7 @@
     }
   },
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-11-17T01:05:39.056Z",
+  "updatedAt": "2021-11-30T17:22:21.694Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

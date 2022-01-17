@@ -14,7 +14,7 @@
   "sourceMap": "34:308:2:-;;;284:56;8:9:-1;5:2;;;30:1;27;20:12;5:2;284:56:2;323:10;315:5;;:18;;;;;;;;;;;;;;;;;;34:308;;;;;;",
   "deployedSourceMap": "34:308:2:-;;;;;",
   "source": "pragma solidity >=0.4.99 <0.7.0;\n\ncontract Ownable {\n    // State variable\n    address payable owner;\n\n    // Modifiers\n    modifier onlyOwner() {\n        require(msg.sender == owner, \"This function can only be called by the contract owner\");\n        _;\n    }\n\n    // constructor\n    constructor() public {\n        owner = msg.sender;\n    }\n}",
-  "sourcePath": "/Users/reaper/Documents/plata/contracts/Ownable.sol",
+  "sourcePath": "/Users/reaper/Documents/plata1.0/contracts/Ownable.sol",
   "ast": {
     "absolutePath": "project:/contracts/Ownable.sol",
     "exportedSymbols": {
@@ -707,7 +707,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-10-05T22:12:25.884Z",
+  "updatedAt": "2021-11-30T17:22:18.616Z",
   "devdoc": {
     "methods": {}
   },
