@@ -42,36 +42,38 @@
         
         
         
-        <div class="banner-text">
+          <div class="banner-text">
+
               
-          <ul>
-            
-            <title></title>
-            <nav class="navigation ">
+                <ul>
+                  
 
-              <li><a href="home.html">Home</a></li>
-              <li><a href="myprofile.html">My Profile</a></li>
-              <li><a href="about.html">About</a></li>
+                  <nav class="navigation ">
 
-            </nav>
+                  <li><a href="home.html">Home</a></li>
+                  <li><a href="myprofile.html">My Profile</a></li>
+                  <li><a href="about.html">About</a></li>
 
+                </nav>
 
-          </ul>
+                  
+      
+      
+                </ul>
 
-          <ul2>
+                <ul2>
 
-            <p1>Connected Account:</p1>
-            <br/>
-            <p2 id="account" class="welcome pull-right"></p2>
-            <br/>
-            <p3 id="accountBalance" class="welcome pull-left"></p3>
+                  <p1>Connected Account:</p1>
+                  <br/>
+                  <p2 id="account" class="welcome pull-right"></p2>
+                  <br/>
+                  <p3 id="accountBalance" class="welcome pull-left"></p3>
 
-          </ul2>
-          
-
-
-        </div>
-    
+                </ul2>
+                
+      
+      
+              </div>
           
 
 
@@ -102,31 +104,214 @@
 
           <div class="navbar-inner navbar-content-center text-center">
 
-            <p class="text-muted" credit><a href="https://sensorweb.engr.uga.edu/">SensorWeb Research Laboratory</a> - &copy; 2020 - <a href="https://sensorweb.engr.uga.edu/index.php/people/">William Rittmeyer</a> and <a href="https://sensorweb.engr.uga.edu/index.php/people/">Soumya Pal</a></p>
+            <p class="text-muted" credit><a href="https://sensorweb.engr.uga.edu/">SensorWeb Research Laboratory</a> - &copy; 2020 </p>
           </div>
         </nav>
 
         <div class="home-title">
-          <h1>Plata Exchange Marketplace</h1>
           <h2>Plata</h2>
-
-        </div>
-
-        
       
-    
-
+        </div>
+        
         <img src="placeholder_logo.png" class="placeholder-logo" />
         <a class= "front-link" href ="index.html"></a>
+
+
+
+      
+      <div class="container">
+        
+      </div>
+
+      
+      <div class="col-1" id="article-list">
+      <div class="panel-heading">
+        <div>
+          <button class="btnblue btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle" onclick="App.blurBackground();" >Sell a File</button>
+        </div>
+        <br/>
+      <pre> Item           Description                                                        Price(ETH)             Seller</pre>
+      <br/>
+      </div>
+      
+        <div id="articlesRow" class="row">
+        Loading Items for Sale...
+        <!-- ARTICLES LOAD HERE -->
+
+        </div>    
+      </div>
+      <div class ="table1-header">
+        Current Marketplace
+      </div>
+
+      <div class ="table2-header">
+        Events
+      </div>
+
+      
 
      
 
 
 
+
+
+      <div class="col-2" id="article-list2">
+
+
+      <div class="row panel panel-default">
+        <div class="panel-heading clearfix">
+          <div class="panel-title">
+            <button class="btn btn-info btn-lg pull-left btn-event btn-unsubscribe" onclick="App.stopListeningToEvents(); return false;">Unsubscribe</button>
+            <button class="btn btn-info btn-lg pull-left btn-event btn-subscribe" style="display: none" onclick="App.listenToEvents(); return false;">Subscribe</button>
+            <button class="btn btn-info btn-lg pull-left btn-show-events" data-toggle="collapse" data-target="#events" aria-expanded="false"
+                    aria-controls="events">Show Events</button>
+            <!--button class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle" onclick="App.blurBackground();" >Sell a File</button-->
+          </div>
+          <br/>
+        </div>
+        <ul id="events" class="collapse list-group"></ul>
+      </div>
+
+      
+      </div>
+
+       <div class="col-3" id="article-list2">
+      
+      </div>
+
+      
+        
+
+
+
+        <div id="articleTemplate" style="display: none;">
+          <div class="row-lg-12">
+            <div class="panel panel-default panel-article">
+              
+              <div class="panel-body">
+                <pre class="panel-title" style ="display: inline-block;"></pre>
+                <div class="article-description" style ="display: inline-block;"></div>
+                <div class="article-price" style ="display: inline-block;"></div>
+                <div class="article-seller" style ="display: inline-block;"></div>
+                <button type="button" style ="display: inline-block;" class="btn btngreen btn-primary btn-success btn-buy" onclick="App.buyArticle(event); return false;">Buy</button>
+                <button type="button" style ="display: inline-block;" class="btn btngreen btn-primary btn-success btn-buy" onclick="App.buyArticle(event); return false;">View</button>
+                <br/>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+
+    
+
+
   
 
   <!-- Modal form to sell an article -->
+  <div class="modal fade" id="sellArticle" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" onclick="App.unblurBackground();" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sell your article</h4>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+            <div class="col-lg-12">
+              <form>
+                <div class="form-group">
+                  <label for="article_name">Article name</label>
+                  <input type="text" class="form-control" id="article_name" placeholder="Enter the name of your article">
+                </div>
+                <div class="form-group">
+                  <label for="price">Price in ETH</label>
+                  <input type="number" class="form-control" id="article_price" placeholder="1" pattern="[0-9]+([\.,][0-9]+)?"
+                    step="0.01">
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea type="text" class="form-control vresize" id="article_description" placeholder="Describe your article"
+                    maxlength="255"></textarea>
+                </div>
+                <input type ="file" id="input" onchange='uploadFile();' />
+                <label type="text" id="hashvalue" hidden="hidden"></label>
+                <label type="text" id="hashvalue1" hidden="hidden"></label>
+                <p id="ipfslinktitle"></p>
+                <p id="ipfslink"><a href=''></a></p>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btngreen btn btn-primary btn-success" data-dismiss="modal" onclick="App.sellArticle(); submitFile(); return false;">Submit</button>
+          <button type="button" class="btn btnred" data-dismiss="modal" onclick="App.unblurBackground();" >Close</button>
+          
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    
+  <div class="modal-loading" id ="modal-loading" hidden="true">
+      <h1> Please wait as the transaction is processed</h1>
+
+      <div class = "loading-animation">
+      <div class="sk-grid">
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+        <div class="sk-grid-cube"></div>
+      </div>
+
+    </div>
+
+      <button type="button" class="modal-close" onclick="App.CloseWindow();">&times;</button>
+    </div>
+
+
+
+
+
+  <div class="modal-submission" id ="modal-submission" hidden="true">
+    <div id= "modal-sale" >
+      <h1> Your file has successfully been put up for sale</h1>
+          <button type="button" class="modal-close" onclick="App.CloseSubmission();">&times;</button>
+    </div>
+  </div>
   
+  <div class="modal-receipt" id ="modal-receipt" hidden="true">
+    <div id= "modal-purchase" >
+      <h1> Thank you for your purchase!</h1>
+      <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="getLink(); return false;">Get Link</button>
+      <h3 id ="purchaselink" hidden="true"></h2>
+      <h3 id ="testlink"></h2>
+          <button type="button" class="modal-close" onclick="App.CloseReceipt();">&times;</button>
+    </div>
+  </div>
+
+  <div class="modal-error" id ="modal-error" hidden="true">
+      <h1> Looks like something went wrong.</h1>
+          <button type="button" class="modal-close" onclick="App.CloseError();">&times;</button>
+  </div>
+
+  
+
+  
+
+
 
  
 
@@ -140,8 +325,9 @@
   <script src="js/truffle-contract.js"></script>
   <script src="js/app.js"></script>
   <script src="js/bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9/sha256.js"></script>
     <script type="text/javascript"></script>
     </script>
 </body>
 </html>
-

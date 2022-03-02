@@ -34133,6 +34133,12 @@ $('#ipfslinktitle').text('');
 
 };
 
+getAndLog = async(cid) => {
+  const result = await ipfs.dag.get(cid)
+  console.log(result.value)
+}
+
+
 getLink = async() => {
   //hash = 'hello'
   enchash = $('#purchaselink').text();
@@ -34144,12 +34150,17 @@ getLink = async() => {
   console.log((hash))
   console.log(typeof(hash))
 
-  ipfs.files.get(fileHash, function (err, files) {
-    files.forEach((file) => {
-        console.log(file.path)
-        console.log("File content >> ",file.content.toString('utf8'))
-    })
-})
+  //await getAndLog()
+
+  const result = await ipfs.dag.get(fileHash)
+  console.log(result.value)
+
+  //ipfs.dag.get(fileHash, function (err, files) {
+    //files.forEach((file) => {
+      //  console.log(file.path)
+        //console.log("File content >> ",file.content.toString('utf8'))
+    //})
+//})
   
   //test2 = $('#purchaselink').val();
   //$('#ipfslink').text('');

@@ -59,7 +59,7 @@ uploadFile = () => {
     //set this buffer -using es6 syntax
       //setState({buffer});
  //   console.log(data1);\
- ipfs.add(buffer, async (err,hash) => {
+ ipfs.dag.put(buffer, async (err,hash) => {
       if (err) {
           return console.log(err)
       }
@@ -90,6 +90,12 @@ $('#ipfslinktitle').text('');
 
 };
 
+getAndLog = async(cid) => {
+  const result = await ipfs.dag.get(cid)
+  console.log(result.value)
+}
+
+
 getLink = async() => {
   //hash = 'hello'
   enchash = $('#purchaselink').text();
@@ -100,6 +106,8 @@ getLink = async() => {
   console.log(typeof(fileHash))
   console.log((hash))
   console.log(typeof(hash))
+
+  //await getAndLog()
 
   const result = await ipfs.dag.get(fileHash)
   console.log(result.value)

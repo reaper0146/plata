@@ -12,7 +12,7 @@ contract Market is Ownable {
         string description;
         uint256 price;
         string hashvalue;
-        address[] ACL;
+        address public ACL[5]
     }
 
     // State variables
@@ -24,7 +24,7 @@ contract Market is Ownable {
     string description;
     uint256 price;
     string hashvalue;
-    address[] ACL;
+    address ACL[5];
 
     // Events
     event LogSellArticle (
@@ -41,7 +41,7 @@ contract Market is Ownable {
         string _name,
         uint256 _price,
         string _hashvalue,
-        address[] _ACL);
+        address _ACL);
 
 
 
@@ -54,8 +54,7 @@ contract Market is Ownable {
     function sellArticle(string memory _name, string memory _description, uint256 _price, string memory _hashvalue) public {
         // a new article
         articleCounter++;
-        ACL.push(msg.sender);
-
+        _ACL.append(msg.sender)
 
         // store this article
         articles[articleCounter] = Article(
@@ -66,12 +65,12 @@ contract Market is Ownable {
             _description,
             _price,
             _hashvalue,
-           ACL
+            _ACL
         );
 
 
         // trigger the event
-        emit LogSellArticle(articleCounter, msg.sender, _name, _price, _hashvalue);//, ACL);
+        emit LogSellArticle(articleCounter, msg.sender, _name, _price, _hashvalue, _ACL);
     }
 
     // buy an article
@@ -85,10 +84,9 @@ contract Market is Ownable {
 
         // we retrieve the article
         Article storage article = articles[_id];
-        ACL.push(msg.sender);
 
         // we check whether the article has not already been sold
-        //require(article.buyer == address(0), "Article was already sold");
+        require(article.buyer == address(0), "Article was already sold");
 
         // we don't allow the seller to buy his/her own article
         require(article.seller != msg.sender, "Seller cannot buy his own article");
@@ -106,7 +104,7 @@ contract Market is Ownable {
 
        // emit GiveHash()
         // trigger the event
-        emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.price, article.hashvalue, article.ACL);
+        emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.price, article.hashvalue);
 
     }
 
@@ -138,20 +136,20 @@ contract Market is Ownable {
         }
 
         // copy the articleIds array into the smaller forSale array
-        uint[] memory forSale = new uint[](articleCounter);
-        for (uint j = 0; j < articleCounter; j++) {
+        uint[] memory forSale = new uint[](numberOfArticlesForSale);
+        for (uint j = 0; j < numberOfArticlesForSale; j++) {
             forSale[j] = articleIds[j];
         }
         return forSale;
     }
 
-    /*function checkAccess(msg.sender) public view returns (bool) {
-        uint flag = 0;
-        for (uint j = 0; j < ACL.length; j++) {
-            if (ACL[j] = msg.sender) {
-                break;
+    function checkAccess(msg.sender) public view returns (bool) {
+        uint flag = 0
+        for (uint j = 0; j < len(ACL); j++) {
+            if (ACL[j] = msg.sender;) {
+                break
             } else {
-                flag = 1;
+                flag = 1
             }
         }
         if (flag == 0) {
@@ -160,5 +158,5 @@ contract Market is Ownable {
             return false;
         }
         
-    }*/
+    }
 }
