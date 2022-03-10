@@ -53,11 +53,17 @@ uploadFile = () => {
 
   convertToBuffer = async(reader) => {
     //file is converted to a buffer to prepare for uploading to IPFS
+    //console.log(typeof(reader.result))
       const buffer = await Buffer.from(reader.result);
+      //buffer = encrypt(buffertemp)
+
     //set this buffer -using es6 syntax
       //setState({buffer});
  //   console.log(data1);\
- ipfs.add(buffer, async (err,hash) => {
+    //buff = String(buffer)
+    //console.log(typeof(buff))
+    console.log(typeof(buffer))
+ ipfs.dag.put(buffer, async (err,hash) => {
       if (err) {
           return console.log(err)
       }
@@ -65,6 +71,7 @@ uploadFile = () => {
       $('#hashvalue').text(hash);
       $('#ipfslinktitle').text('Your IPFS Link');
       $('#ipfslink').text('https://ipfs.infura.io/ipfs/' + hash);
+      //$('#ipfslink').text('https://localhost:8080/ipfs/' + hash);
       const hashenc = encrypt(hash)
       //console.log(test)
       console.log(hashenc)
@@ -74,6 +81,8 @@ uploadFile = () => {
       
       
       });
+      const result = await ipfs.dag.get(QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW)//(fileHash)
+  console.log(result.value)
   };
 
 };
@@ -106,10 +115,10 @@ getLink = async() => {
 
   //await getAndLog()
 
-  const result = await ipfs.dag.get(fileHash)
+  const result = await ipfs.dag.get(QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW)//(fileHash)
   console.log(result.value)
 
-  //ipfs.dag.get(fileHash, function (err, files) {
+  //ipfs.dag.get(fileHash, async (err, files) {
     //files.forEach((file) => {
       //  console.log(file.path)
         //console.log("File content >> ",file.content.toString('utf8'))

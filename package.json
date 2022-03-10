@@ -26,8 +26,10 @@
     "ejs": "^3.0.1",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.6",
+    "ipfs": "^0.62.1",
     "ipfs-http-client": "^42.0.0",
     "ipfs-mini": "^1.1.5",
+    "python-shell": "^3.0.1",
     "truffle-contract": "^4.0.31",
     "truffle-hdwallet-provider": "^1.0.0-web3one.5",
     "web3": "^1.2.6"

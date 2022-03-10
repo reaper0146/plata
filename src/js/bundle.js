@@ -34097,8 +34097,6 @@ uploadFile = () => {
   convertToBuffer = async(reader) => {
     //file is converted to a buffer to prepare for uploading to IPFS
       const buffer = await Buffer.from(reader.result);
-      //buffer = encrypt(buffertemp)
-
     //set this buffer -using es6 syntax
       //setState({buffer});
  //   console.log(data1);\
@@ -34110,7 +34108,6 @@ uploadFile = () => {
       $('#hashvalue').text(hash);
       $('#ipfslinktitle').text('Your IPFS Link');
       $('#ipfslink').text('https://ipfs.infura.io/ipfs/' + hash);
-      //$('#ipfslink').text('https://localhost:8080/ipfs/' + hash);
       const hashenc = encrypt(hash)
       //console.log(test)
       console.log(hashenc)
