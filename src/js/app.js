@@ -87,12 +87,14 @@ App = {
         $('.btn-show-events').show();
     },
 
-    testfn: async () =>{
-			
+    testfn: async (temp) =>{
 			//let result = document.querySelector('.result');
 			//let name = document.querySelector('#name');
+            let test = temp;
 			let cid = $('#cid').val(); //document.querySelector('cid');
-            console.log(cid)
+            console.log(cid);
+            console.log(test);
+            console.log(typeof(test));
 			
 			// Creating a XHR object
 			let xhr = new XMLHttpRequest();
@@ -115,7 +117,7 @@ App = {
 			};
 
 			// Converting JSON data to string
-			var data = JSON.stringify({ "cid": cid });
+			var data = JSON.stringify({ "cid": test });
             console.log(data)
 
 			// Sending data with the request
@@ -150,7 +152,7 @@ App = {
         const _description = $('#article_description').val();
         const _price = window.web3.utils.toWei(articlePrice, "ether");
         //const test = $('#hashvalue').text();
-        const _hashvalue = $('#hashvalue1').text();
+        const _hashvalue = $('#hashvalue').text();
         console.log(_hashvalue)
         //console.log(test)
         
@@ -205,9 +207,7 @@ App = {
         const articlePriceValue = parseFloat($(event.target).data('value'));
         const articlePrice = isNaN(articlePriceValue) ? "0" : articlePriceValue.toString();
         const _price = window.web3.utils.toWei(articlePrice, "ether");
-        
-
-        
+        var hash_test        
         
         try {
             const marketInstance = await App.contracts.Market.deployed();
@@ -238,18 +238,15 @@ App = {
                     console.log(event.returnValues._seller);
                     $('#purchaselink').text(event.returnValues._hashvalue);
                     $('#modal-loading').attr('hidden', false);
+                    hash_test = event.returnValues._hashvalue
+                    App.testfn(event.returnValues._hashvalue);
                     App.blurBackground();
 
                 //} else {
                 //    return
             //    }
-            });
-
-
-                
-            });
-                
-                
+                });                
+            });     
 
             /*    App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: "0" }).on("data", event => {
                 
@@ -264,8 +261,8 @@ App = {
             /*    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
                console.log(event.returnValues._name);
                console.log(event.returnValues._seller); */
-                
-            
+               console.log(hash_test);
+            //await App.testfn(hash_test);
             console.log("transaction receipt", transactionReceipt);
             $('#modal-loading').attr('hidden', true);
             $('#modal-receipt').attr('hidden', false);

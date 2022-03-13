@@ -3,7 +3,6 @@ import sys
 import pandas as pd
 import subprocess
 import json
-
 import requests
 
 test = sys.argv[1]
@@ -33,8 +32,13 @@ else:
 #print(TESTDATA)
 #df = pd.read_csv(str(os.system('curl -X POST \"https://ipfs.infura.io:5001/api/v0/cat?arg=QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW")), sep=",")
 
+link = "https://ipfs.infura.io:5001/api/v0/cat?arg="+test #QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW"
+
+print(link)
+print(type(link))
+
 proc = subprocess.run(["curl",  "-X", "POST",  
-                  "https://ipfs.infura.io:5001/api/v0/cat?arg=QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW"],
+                  link],
                    stdout=subprocess.PIPE, encoding='utf-8')
 
 cadastro = proc.stdout
@@ -43,5 +47,5 @@ data = io.StringIO(cadastro)
 #df = pd.DataFrame([json.loads(cadastro)])
 #print(data)
 df = pd.read_csv(data, sep=",")
-print(df['county'])
-print(test)
+print(df)
+#print(type(test))

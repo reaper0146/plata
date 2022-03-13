@@ -1,47 +1,5 @@
 const IPFS = require('ipfs-mini');
-const CryptoJS = require("crypto-js");
 const ipfs = new IPFS({host: 'ipfs.infura.io', port: 5001, protocol: 'https'});
-//const ipfs = new IPFS({host: 'localhost', port: 5001, protocol: 'https'});
-const crypto = require('crypto');
-
-const algorithm = 'aes-256-ctr';
-let key = 'MySuperSecretKey';
-key = crypto.createHash('sha256').update(key).digest('base64').substr(0, 32);
-
-const BufferList = require('bl/BufferList')
-
-const encrypt3 = (buffer) => {
-    // Create an initialization vector
-    const iv = crypto.randomBytes(16);
-    // Create a new cipher using the algorithm, key, and iv
-    const cipher = crypto.createCipheriv(algorithm, key, iv);
-    // Create the new (encrypted) buffer
-    const result = Buffer.concat([iv, cipher.update(buffer), cipher.final()]);
-    return result;
-};
-
-const decrypt3 = (encrypted) => {
-  // Get the iv: the first 16 bytes
-  const iv = encrypted.slice(0, 16);
-  // Get the rest
-  encrypted = encrypted.slice(16);
-  // Create a decipher
-  const decipher = crypto.createDecipheriv(algorithm, key, iv);
-  // Actually decrypt it
-  const result = Buffer.concat([decipher.update(encrypted), decipher.final()]);
-  return result;
-};
-
-const encrypt = (text) => {
-  var ciphertext = CryptoJS.AES.encrypt(text, 'secret key 123').toString();
-  return ciphertext;
-};
-
-const decrypt = (text) => {
-  var bytes  = CryptoJS.AES.decrypt(text, 'secret key 123');
-  var originalText = bytes.toString(CryptoJS.enc.Utf8);
-  return originalText;
-};
 
 
 
@@ -57,7 +15,7 @@ uploadFile = () => {
     //set this buffer -using es6 syntax
       //setState({buffer});
  //   console.log(data1);\
- ipfs.add(buffer, async (err,hash) => {
+ ipfs.add(buffer, (err,hash) => {
       if (err) {
           return console.log(err)
       }
@@ -65,10 +23,6 @@ uploadFile = () => {
       $('#hashvalue').text(hash);
       $('#ipfslinktitle').text('Your IPFS Link');
       $('#ipfslink').text('https://ipfs.infura.io/ipfs/' + hash);
-      const hashenc = encrypt(hash)
-      //console.log(test)
-      console.log(hashenc)
-      $('#hashvalue1').text(hashenc);
 
 
       
@@ -86,42 +40,3 @@ $('#ipfslinktitle').text('');
   console.log("Submitted!")
 
 };
-
-getAndLog = async(cid) => {
-  const result = await ipfs.dag.get(cid)
-  console.log(result.value)
-}
-
-
-getLink = async() => {
-  //hash = 'hello'
-  enchash = $('#purchaselink').text();
-  console.log(enchash)
-  const hash = decrypt(enchash)
-  const fileHash = hash.toString()
-  console.log(fileHash)
-  console.log(typeof(fileHash))
-  console.log((hash))
-  console.log(typeof(hash))
-
-  //await getAndLog()
-
-  const result = await ipfs.dag.get(fileHash)
-  console.log(result.value)
-
-  //ipfs.dag.get(fileHash, function (err, files) {
-    //files.forEach((file) => {
-      //  console.log(file.path)
-        //console.log("File content >> ",file.content.toString('utf8'))
-    //})
-//})
-  
-  //test2 = $('#purchaselink').val();
-  //$('#ipfslink').text('');
-  //$('#ipfslinktitle').text('https://ipfs.infura.io/ipfs/' + hash);
-  console.log(hash)
-  $('#testlink').text('https://ipfs.infura.io/ipfs/' + hash);
-  //console.log(test2)     
-  console.log("Get link!")
-  
-  };
