@@ -131,10 +131,10 @@ contract Market is Ownable {
         // iterate over articles
         for (uint i = 1; i <= articleCounter; i++) {
             // keep only the ID for the article not already sold
-            if (articles[i].buyer == address(0)) {
+            //if (articles[i].buyer == address(0)) {
                 articleIds[numberOfArticlesForSale] = articles[i].id;
                 numberOfArticlesForSale++;
-            }
+            //}
         }
 
         // copy the articleIds array into the smaller forSale array

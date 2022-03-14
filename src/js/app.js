@@ -87,7 +87,7 @@ App = {
         $('.btn-show-events').show();
     },
 
-    testfn: async (temp) =>{
+    runPython: async (temp) =>{
 			//let result = document.querySelector('.result');
 			//let name = document.querySelector('#name');
             let test = temp;
@@ -239,7 +239,7 @@ App = {
                     $('#purchaselink').text(event.returnValues._hashvalue);
                     $('#modal-loading').attr('hidden', false);
                     hash_test = event.returnValues._hashvalue
-                    App.testfn(event.returnValues._hashvalue);
+                    App.runPython(event.returnValues._hashvalue);
                     App.blurBackground();
 
                 //} else {
