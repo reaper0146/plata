@@ -8,16 +8,16 @@ app.use(express.json())
 app.use(cors())
 
 app.post('/runPython', (req,res)=> {
-    const username = String(req.body.cid)
+    const cid = String(req.body.cid)
     //const password = req.body.password
-    console.log(typeof(username))
+    //console.log(typeof(cid))
     //console.log(password)
     //initIPFS()
     let options = {
         mode: 'text',
         pythonOptions: ['-u'], // get print results in real-time
           //scriptPath: 'path/to/my/scripts' //If you are having python_test.py script in same folder, then it's optional.
-        args: [username] //An argument which can be accessed in the script using sys.argv[1]
+        args: [cid] //An argument which can be accessed in the script using sys.argv[1]
     };
      
     PythonShell.run('fetch.py', options, function (err, result){
@@ -32,6 +32,13 @@ app.post('/runPython', (req,res)=> {
     (err,result) => {console.log(err);}
     );*/
 });
+})
+
+app.post('/testPy', (req,res)=> {
+    const username = req.body
+    //const password = req.body.password
+    console.log(username)
+
 })
 
 

@@ -150,21 +150,5 @@ contract Market is Ownable {
         return forSale;
     }
 
-    function checkAccess(_id) public view returns (bool) {
-        uint flag = 0;
-        Article storage article = articles[_id];
-        for (uint j = 0; j < article.ACL.length; j++) {
-            if (article.ACL[j] == msg.sender) {
-                break;
-            } else {
-                flag = 1;
-            }
-        }
-        if (flag == 0) {
-            return true;
-        } else {
-            return false;
-        }
-        
-    }
+
 }

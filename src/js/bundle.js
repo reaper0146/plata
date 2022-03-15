@@ -2242,5 +2242,21 @@ $('#ipfslinktitle').text('');
   console.log("Submitted!")
 
 };
+/*
+testFile = () => {
+  
+  console.log("Submitted!")
+
+const file = document.getElementById('filepy').files[0];
+//let photo = document.getElementById("image-file").files[0];  // file from input
+let req = new XMLHttpRequest();
+let formData = new FormData();
+
+formData.append("file", file);    
+let url = "http://localhost:5001/testPy";                            
+req.open("POST", url, true);
+req.send(formData);
+  
+  };*/
 }).call(this)}).call(this,require("buffer").Buffer)
 },{"buffer":2,"ipfs-mini":4}]},{},[6]);

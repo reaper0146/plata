@@ -5,7 +5,7 @@ import subprocess
 import json
 import requests
 
-test = sys.argv[1] #'QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW' #sys.argv[1]
+test = sys.argv[1] #'QmTn6LTbAv9wHTzDsMtoa8Zr9WdhX9KbfLkrLgBo3EVr9A' #sys.argv[1] #'QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW' #sys.argv[1]
 #print(test)
 #params = (
 #   ('arg', 'QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW'),
@@ -34,8 +34,8 @@ else:
 
 link = "https://ipfs.infura.io:5001/api/v0/cat?arg="+test #QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW"
 
-print(link)
-print(type(link))
+#print(link)
+#print(type(link))
 
 proc = subprocess.run(["curl",  "-X", "POST",  
                   link],
@@ -47,7 +47,7 @@ data = io.StringIO(cadastro)
 #df = pd.DataFrame([json.loads(cadastro)])
 #print(data)
 df = pd.read_csv(data, sep=",")
-print(df['Salary'])
+print(df)
 #print(type(test))
 # Simple Linear Regression
 
@@ -57,6 +57,7 @@ import matplotlib.pyplot as plt
 
 # Importing the dataset
 dataset = df #pd.read_csv(data, sep=",")
+print(dataset)
 X = dataset.iloc[:, :-1].values
 y = dataset.iloc[:, -1].values
 
@@ -87,3 +88,4 @@ plt.title('Salary vs Experience (Test set)')
 plt.xlabel('Years of Experience')
 plt.ylabel('Salary')
 plt.show()
+print("\nEnd")
