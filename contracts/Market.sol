@@ -54,7 +54,11 @@ contract Market is Ownable {
     function sellArticle(string memory _name, string memory _description, uint256 _price, string memory _hashvalue) public {
         // a new article
         articleCounter++;
-        ACL.push(msg.sender);
+        //ACL.push(msg.sender);
+        //address[] memory _ACL = new address[];
+        //ACL.push(msg.sender);
+       // _ACL.push(msg.sender);
+
 
 
         // store this article
@@ -85,7 +89,8 @@ contract Market is Ownable {
 
         // we retrieve the article
         Article storage article = articles[_id];
-        ACL.push(msg.sender);
+
+        article.ACL.push(msg.sender);
 
         // we check whether the article has not already been sold
         //require(article.buyer == address(0), "Article was already sold");
@@ -145,10 +150,11 @@ contract Market is Ownable {
         return forSale;
     }
 
-    /*function checkAccess(msg.sender) public view returns (bool) {
+    function checkAccess(_id) public view returns (bool) {
         uint flag = 0;
-        for (uint j = 0; j < ACL.length; j++) {
-            if (ACL[j] = msg.sender) {
+        Article storage article = articles[_id];
+        for (uint j = 0; j < article.ACL.length; j++) {
+            if (article.ACL[j] == msg.sender) {
                 break;
             } else {
                 flag = 1;
@@ -160,5 +166,5 @@ contract Market is Ownable {
             return false;
         }
         
-    }*/
+    }
 }
