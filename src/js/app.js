@@ -311,6 +311,91 @@ App = {
         }
     },
 
+    getArticle: async () => {
+        event.preventDefault();
+        var hash_test = 'empty'
+
+        // retrieve the article price
+        var _articleId = $(event.target).data('id');
+        const articlePriceValue = parseFloat($(event.target).data('value'));
+        const articlePrice = isNaN(articlePriceValue) ? "0" : articlePriceValue.toString();
+        const _price = window.web3.utils.toWei(articlePrice, "ether");
+        var hash_test        
+        
+        try {
+            const marketInstance = await App.contracts.Market.deployed();
+            
+           // const articleIds = await marketInstance.getArticlesForSale();
+            const transactionReceipt = await marketInstance.checkAccess(
+                _articleId, {
+                    from: App.account,
+                    gas: 500000
+                }
+            ).on("transactionHash", hash => {
+                console.log("transaction hash", hash);
+
+                var number = 0;
+                console.log(number);
+                //console.log(_articleId);
+                //number = _articleId
+                marketInstance.LogBuyArticle({fromBlock: "0", toBlock: 'latest'}).on("data", async function(event) {
+                number++;    
+                console.log(number);
+                console.log(event)
+                //console.log(transactionReceipt.receipt);
+                console.log(_articleId);
+                //if (number == _articleId){
+                    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
+                    console.log(event.returnValues._name);
+                    console.log(event.returnValues._seller);
+                    $('#purchaselink').text(event.returnValues._hashvalue);
+                    $('#modal-loading').attr('hidden', false);
+                    hash_test = event.returnValues._hashvalue
+                    App.blurBackground();
+
+                //} else {
+                //    return
+            //    }
+                });                
+            });     
+
+            /*    App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: "0" }).on("data", event => {
+                
+               console.log(_articleId);
+               console.log(event.returnValues);
+               
+
+               
+
+                });
+
+            /*    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
+               console.log(event.returnValues._name);
+               console.log(event.returnValues._seller); */
+            console.log(hash_test);
+            //await App.testfn(hash_test);
+            console.log("transaction receipt", transactionReceipt);
+            $('#modal-loading').attr('hidden', true);
+            App.blurBackground();
+
+
+        } catch(error) {
+            console.error(error);
+            $('#modal-loading').attr('hidden', true);
+            $('#modal-error').attr('hidden', false);
+            App.blurBackground();
+        }
+
+        if (hash_test === 'empty')
+        {
+            $('#modal-receipt').attr('hidden', false);
+        }
+        else{
+            $('#modal-receipt').attr('hidden', false);
+            App.runPython(event.returnValues._hashvalue);
+        }
+    },
+
 
 
     reloadArticles: async () => {
@@ -363,6 +448,8 @@ App = {
         // add this new article
         articlesRow.append(articleTemplate.html());
     },
+
+    
 
     CloseReceipt: async () => {
         $('#modal-receipt').attr('hidden', true);

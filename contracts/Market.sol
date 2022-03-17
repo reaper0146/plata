@@ -42,6 +42,10 @@ contract Market is Ownable {
         uint256 _price,
         string _hashvalue,
         address[] _ACL);
+    
+    event LogCheckAccess(
+        string accessTxt
+    );
 
 
 
@@ -148,6 +152,25 @@ contract Market is Ownable {
             forSale[j] = articleIds[j];
         }
         return forSale;
+    }
+
+    function checkAccess(uint _id) public {
+        uint flag = 0;
+        Article storage article = articles[_id];
+        for (uint j = 0; j < article.ACL.length; j++) {
+            if (article.ACL[j] == msg.sender) {
+                flag = 2;
+                break;
+            } else {
+                flag = 1;
+            }
+        }
+        if (flag == 2) {
+            emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.price, article.hashvalue, article.ACL);
+        } else {
+            emit LogCheckAccess("Need to purchase first");
+        }
+        
     }
 
 

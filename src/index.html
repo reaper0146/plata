@@ -125,16 +125,16 @@
 
       
       <div class="col-1" id="article-list">
-        <input type="text" id="cid" placeholder="CID">
-        <button onclick="testfn()">Send JSON</button>
+        <!--input type="text" id="cid" placeholder="CID">
+        <button onclick="testfn()">Send JSON</button-->
       <div class="panel-heading">
-        <input type="text" id="cid" placeholder="CID">
-        <button onclick="App.testfn()">Send JSON</button>
+        <!--input type="text" id="cid" placeholder="CID">
+        <button onclick="App.testfn()">Send JSON</button-->
         <div>
           <button class="btnblue btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle" onclick="App.blurBackground();" >Sell a File</button>
         </div>
         <br/>
-      <pre> Item           Description                                                        Price(ETH)             Seller</pre>
+      <pre> Item           Description                Price(ETH)             Seller                                                                Action</pre>
       <br/>
       </div>
       
@@ -199,7 +199,7 @@
                 <div class="article-price" style ="display: inline-block;"></div>
                 <div class="article-seller" style ="display: inline-block;"></div>
                 <button type="button" style ="display: inline-block;" class="btn btngreen btn-primary btn-success btn-buy" onclick="App.buyArticle(event); return false;">Buy</button>
-                <button type="button" style ="display: inline-block;" class="btn btngreen btn-primary btn-success btn-buy" onclick="App.buyArticle(event); return false;">View</button>
+                <button type="button" style ="display: inline-block;" class="btn btngreen btn-primary btn-success btn-buy" onclick="App.getArticle(event); return false;">View</button>
                 <br/>
             </div>
           </div>
