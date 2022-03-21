@@ -9,7 +9,7 @@ contract Market is Ownable {
         address payable seller;
         address buyer;
         string name;
-        string description;
+        string decryptKey;
         uint256 price;
         string hashvalue;
         address[] ACL;
@@ -21,7 +21,7 @@ contract Market is Ownable {
     address seller;
     address buyer;
     string name;
-    string description;
+    string decryptKey;
     uint256 price;
     string hashvalue;
     address[] ACL;
@@ -39,7 +39,7 @@ contract Market is Ownable {
         address indexed _seller,
         address indexed _buyer,
         string _name,
-        string _description,
+        string _decryptKey,
         uint256 _price,
         string _hashvalue,
         address[] _ACL);
@@ -56,7 +56,7 @@ contract Market is Ownable {
     }
 
     // sell an article
-    function sellArticle(string memory _name, string memory _description, uint256 _price, string memory _hashvalue) public {
+    function sellArticle(string memory _name, string memory _decryptKey, uint256 _price, string memory _hashvalue) public {
         // a new article
         articleCounter++;
         //ACL.push(msg.sender);
@@ -72,7 +72,7 @@ contract Market is Ownable {
             msg.sender,
             address(0),
             _name,
-            _description,
+            _decryptKey,
             _price,
             _hashvalue,
            ACL
@@ -116,7 +116,7 @@ contract Market is Ownable {
 
        // emit GiveHash()
         // trigger the event
-        emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.description, article.price, article.hashvalue, article.ACL);
+        emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.decryptKey, article.price, article.hashvalue, article.ACL);
 
     }
 
@@ -167,7 +167,7 @@ contract Market is Ownable {
             }
         }
         if (flag == 2) {
-            emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.description, article.price, article.hashvalue, article.ACL);
+            emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.decryptKey, article.price, article.hashvalue, article.ACL);
         } else {
             emit LogCheckAccess("Need to purchase first");
         }

@@ -16,6 +16,27 @@ datatest = text_file.read()
 text_file.close()
 print(datatest)
 
+#test = 'QmTn6LTbAv9wHTzDsMtoa8Zr9WdhX9KbfLkrLgBo3EVr9A' #sys.argv[1] #'QmTn6LTbAv9wHTzDsMtoa8Zr9WdhX9KbfLkrLgBo3EVr9A' #sys.argv[1] #'QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW' #sys.argv[1]
+#print(test)
+#params = (
+#   ('arg', 'QmNM6EjpTvf236cZUzCwQxv1xbiBYjHsTKJP7xKhvwU8YW'),
+#)
+#enc = 'U2FsdGVkX19yavjp4l5SMkZbzFpspFX2PrRD9dluwcr7Y+c2EPjDyjFt5LjuX3Tlb8QCk4HxuWHxi0mT+P+z3qC9vP5sjG5IxkSB6taT5ZfTYvMjwrS7gb608rk8F29HZ46iX+XuzwCzYcPXxkH+/iO+sUczXlI4dc10AUlLmbG3fdpqXCaqWyZilnXSk/+k1oj2zQ37ZsNwFc2MC5zFNXRBpy6OfrO8hBLWLcS10WKtqzsCAMHYyPMxK/62g0Vb62KVyITzsTrK0ZaTSaqyOSaviEQa83TYNvj4tk91LxbIXKx3FMAxaJ4n7fYFmKVCMbgXywPd+1zPhFumsYFuxCc+/YOv8xpsGXa1/TlzHfJFxBQkZqD8JfCci5gYithYGrtkKezoEKtg7oCfI4DXoAMvLLcZv6CqyUDL3qPkDrLOxYAIwjdXVEaaPvUW+G8ZRjiyK44XgC+eltuOO4CbtnGRIvsmgh7Zy37pdeN5oaKwVzLqPccu1Qi6rMWuHBxC9hAprkf/v4INLpHV3ZtmlP734rTtkgvfU1d4YU3sV4IkyLkh0yyORMHD5FCua30ShXOAr2cYkX3t91kQgoAtrzoDAg1+PsQzOI2RWcpYPY3BMKcEq42DAoaqieDa2xvZ'
+
+#try:
+ #    cipher.verify(tag)
+  #   print("The message is authentic:", plaintext)
+#except ValueError:
+ #   print("Key incorrect or message corrupted")
+#response = requests.get('https://ipfs.infura.io:5001/api/v0/block/get', params=params) #csv
+#print(response.text)
+
+#params = (
+#   ('arg', 'QmPw9LhhdEqyHYc1aYqW9X8FZVsCzfsR44FKykc2YfLTTs'),
+#)
+#response = requests.post('https://ipfs.infura.io:5001/api/v0/block/get', params=params)
+#print(response.text)
+
 if sys.version_info[0] < 3: 
     from StringIO import StringIO
 else:

@@ -87,18 +87,21 @@ App = {
         $('.btn-show-events').show();
     },
 
-    runPython: async (temp) =>{
+    runPython: async (identifier, key) =>{
 			//let result = document.querySelector('.result');
 			//let name = document.querySelector('#name');
-            let test = temp;
-			let cid = $('#cid').val(); //document.querySelector('cid');
-            console.log(cid);
-            console.log(test);
-            console.log(typeof(test));
+            let cid = identifier;
+            let de_key = key;
+            console.log(key)
+            console.log(de_key)
+			//let cid = $('#cid').val(); //document.querySelector('cid');
+            //console.log(cid);
+            //console.log(test);
+            //console.log(typeof(test));
 			
 			// Creating a XHR object
 			let xhr = new XMLHttpRequest();
-			let url = "http://localhost:5001/runPython";
+			let url = "http://localhost:5002/runPython";
 	
 			// open a connection
 			xhr.open("POST", url, true);
@@ -117,7 +120,7 @@ App = {
 			};
 
 			// Converting JSON data to string
-			var data = JSON.stringify({ "cid": test });
+			var data = JSON.stringify({ "cid": identifier, "key": de_key});
             console.log(data)
 
 			// Sending data with the request
@@ -145,6 +148,34 @@ App = {
         $('.btn-show-events').hide();
     },
 
+    /*encryptMessage: async(key) => {
+        let encoded = getMessageEncoding();
+        // counter will be needed for decryption
+        counter = window.crypto.getRandomValues(new Uint8Array(16));
+        console.log(counter)
+        return window.crypto.subtle.encrypt(
+          {
+            name: "AES-CTR",
+            counter,
+            length: 64
+          },
+          key,
+          encoded
+        );
+      },
+
+       decryptMessage: (key, ciphertext) =>{
+        return window.crypto.subtle.decrypt(
+          {
+            name: "AES-CTR",
+            counter,
+            length: 64
+          },
+          key,
+          ciphertext
+        );
+      },*/
+
     sellArticle: async () => {
         const articlePriceValue = parseFloat($('#article_price').val());
         const articlePrice = isNaN(articlePriceValue) ? "0" : articlePriceValue.toString();
@@ -153,7 +184,11 @@ App = {
         const _price = window.web3.utils.toWei(articlePrice, "ether");
         //const test = $('#hashvalue').text();
         const _hashvalue = $('#hashvalue').text();
-        console.log(_hashvalue)
+        const _decryptKey = $('#decryptKey').text();
+        console.log(_decryptKey)
+        //testenc = await encryptMessage(_name)
+        //console.log(testenc)
+        //testdeypt = await 
         //console.log(test)
         
 
@@ -165,7 +200,7 @@ App = {
         //    console.log(value123);
             const transactionReceipt = await marketInstance.sellArticle(
                 _name,
-                _description,
+                _decryptKey,
                 _price,
                 _hashvalue,
                 {from: App.account, gas: 5000000}
@@ -236,10 +271,11 @@ App = {
                     console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
                     console.log(event.returnValues._name);
                     console.log(event.returnValues._seller);
-                    $('#purchaselink').text(event.returnValues._hashvalue);
+                    console.log(event.returnValues._description);
+                    await $('#purchaselink').text(event.returnValues._hashvalue);
                     $('#modal-loading').attr('hidden', false);
-                    hash_test = event.returnValues._hashvalue
-                    App.runPython(event.returnValues._hashvalue);
+                    //hash_test = event.returnValues._hashvalue
+                    App.runPython(event.returnValues._hashvalue, event.returnValues._description);
                     App.blurBackground();
 
                 //} else {
@@ -261,7 +297,7 @@ App = {
             /*    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
                console.log(event.returnValues._name);
                console.log(event.returnValues._seller); */
-               console.log(hash_test);
+               //console.log(hash_test);
             //await App.testfn(hash_test);
             console.log("transaction receipt", transactionReceipt);
             $('#modal-loading').attr('hidden', true);
@@ -388,11 +424,11 @@ App = {
 
         if (hash_test === 'empty')
         {
-            $('#modal-receipt').attr('hidden', false);
+            $('#modal-buyIt').attr('hidden', false);
         }
         else{
             $('#modal-receipt').attr('hidden', false);
-            App.runPython(event.returnValues._hashvalue);
+            App.runPython(hash_test);
         }
     },
 
@@ -431,7 +467,7 @@ App = {
         // Retrieve and fill the article template
         var articleTemplate = $('#articleTemplate');
         articleTemplate.find('.panel-title').text(" " + name);
-        articleTemplate.find('.article-description').text(description);
+        //articleTemplate.find('.article-description').text(description);
         articleTemplate.find('.article-price').text(etherPrice);
         articleTemplate.find('.btn-buy').attr('data-id', id);
         articleTemplate.find('.btn-buy').attr('data-value', etherPrice);
@@ -453,6 +489,14 @@ App = {
 
     CloseReceipt: async () => {
         $('#modal-receipt').attr('hidden', true);
+        console.log('hello');
+        App.unblurBackground();
+
+
+    },
+
+    CloseBuyIt: async () => {
+        $('#modal-buyIt').attr('hidden', true);
         console.log('hello');
         App.unblurBackground();
 

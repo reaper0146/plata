@@ -29,6 +29,7 @@
     "ipfs": "^0.62.1",
     "ipfs-http-client": "^42.0.0",
     "ipfs-mini": "^1.1.5",
+    "node-libcurl": "^2.3.4",
     "python-shell": "^3.0.1",
     "truffle-contract": "^4.0.31",
     "truffle-hdwallet-provider": "^1.0.0-web3one.5",

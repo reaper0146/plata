@@ -134,7 +134,7 @@
           <button class="btnblue btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle" onclick="App.blurBackground();" >Sell a File</button>
         </div>
         <br/>
-      <pre> Item           Description                Price(ETH)             Seller                                                                Action</pre>
+      <pre> Item & Description                             Price(ETH)             Seller                                                                Action</pre>
       <br/>
       </div>
       
@@ -232,23 +232,24 @@
               <form>
                 <div class="form-group">
                   <label for="article_name">Article name</label>
-                  <input type="text" class="form-control" id="article_name" placeholder="Enter the name of your article">
+                  <textarea type="text" class="form-control" id="article_name" placeholder="Name and Description of file" maxlength="255"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="price">Price in ETH</label>
-                  <input type="number" class="form-control" id="article_price" placeholder="1" pattern="[0-9]+([\.,][0-9]+)?"
+                  <input type="number" class="form-control vresize" id="article_price" placeholder="1" pattern="[0-9]+([\.,][0-9]+)?"
                     step="0.01">
                 </div>
-                <div class="form-group">
+                <!--div class="form-group">
                   <label for="description">Description</label>
                   <textarea type="text" class="form-control vresize" id="article_description" placeholder="Describe your article"
                     maxlength="255"></textarea>
-                </div>
-                <input type ="file" id="input" onchange='uploadFile();' />
+                </div-->
+                <input type ="file" id="input" onchange='uploadFile(event);' />
                 <label type="text" id="hashvalue" hidden="hidden"></label>
                 <label type="text" id="hashvalue1" hidden="hidden"></label>
                 <p id="ipfslinktitle"></p>
-                <p id="ipfslink"><a href=''></a></p>
+                <p id="ipfslink"></p>
+                <p id="decryptKey" hidden="hidden"></p>
               </form>
             </div>
           </div>
@@ -299,10 +300,21 @@
   <div class="modal-receipt" id ="modal-receipt" hidden="true">
     <div id= "modal-purchase" >
       <h1> Thank you for your purchase!</h1>
+      <h2>Data is being fetched and run on the server!</h2>
+      <!--button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="getLink(); return false;">Get Link</button-->
+      <h3 id ="purchaselink" hidden="false"></h3>
+      <h3 id ="testlink"></h2>
+          <button type="button" class="modal-close" onclick="App.CloseReceipt();">&times;</button>
+    </div>
+  </div>
+
+  <div class="modal-buyIt" id ="modal-buyIt" hidden="true">
+    <div id= "modal-purchase">
+      <h1> Please buy the file before viewing it!</h1>
       <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="getLink(); return false;">Get Link</button>
       <h3 id ="purchaselink" hidden="false"></h2>
       <h3 id ="testlink"></h2>
-          <button type="button" class="modal-close" onclick="App.CloseReceipt();">&times;</button>
+          <button type="button" class="modal-close" onclick="App.CloseBuyIt();">&times;</button>
     </div>
   </div>
 
@@ -311,15 +323,6 @@
           <button type="button" class="modal-close" onclick="App.CloseError();">&times;</button>
   </div>
 
-  
-
-  
-
-
-
- 
-
-
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -327,6 +330,7 @@
   <script src="js/bootstrap.min.js"></script>
   <script src="js/web3.min.js"></script>
   <script src="js/truffle-contract.js"></script>
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
   <script src="js/app.js"></script>
   <script src="js/bundle.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
