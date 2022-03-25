@@ -9,7 +9,7 @@ contract Market is Ownable {
         address payable seller;
         address buyer;
         string name;
-        string description;
+        string decryptkey;
         uint256 price;
         string hashvalue;
         address[] ACL;
@@ -21,7 +21,7 @@ contract Market is Ownable {
     address seller;
     address buyer;
     string name;
-    string description;
+    string decryptkey;
     uint256 price;
     string hashvalue;
     address[] ACL;
@@ -39,12 +39,12 @@ contract Market is Ownable {
         address indexed _seller,
         address indexed _buyer,
         string _name,
-        string _description,
+        string _decryptkey,
         uint256 _price,
         string _hashvalue,
         address[] _ACL);
-    
-    event LogCheckAccess(
+
+    event LogNoAccess(
         string accessTxt
     );
 
@@ -56,23 +56,17 @@ contract Market is Ownable {
     }
 
     // sell an article
-    function sellArticle(string memory _name, string memory _description, uint256 _price, string memory _hashvalue) public {
+    function sellArticle(string memory _name, string memory _decryptkey, uint256 _price, string memory _hashvalue) public {
         // a new article
         articleCounter++;
-        //ACL.push(msg.sender);
-        //address[] memory _ACL = new address[];
-        //ACL.push(msg.sender);
-       // _ACL.push(msg.sender);
-
-
-
+       
         // store this article
         articles[articleCounter] = Article(
             articleCounter,
             msg.sender,
             address(0),
             _name,
-            _description,
+            _decryptkey,
             _price,
             _hashvalue,
            ACL
@@ -86,48 +80,41 @@ contract Market is Ownable {
     // buy an article
     function buyArticle(uint _id) public payable {
 
-        // we check whether there is at least one article
+        // check that there is at least one article
         require(articleCounter > 0, "There should be at least one article");
 
-        // we check whether the article exists
+        // check that the article exists
         require(_id > 0 && _id <= articleCounter, "Article with this id does not exist");
 
-        // we retrieve the article
+        // retrieve the article
         Article storage article = articles[_id];
 
+        //buyer is added to the ACL
         article.ACL.push(msg.sender);
 
-        // we check whether the article has not already been sold
-        //require(article.buyer == address(0), "Article was already sold");
-
-        // we don't allow the seller to buy his/her own article
+        // the owner cannot buy their own article
         require(article.seller != msg.sender, "Seller cannot buy his own article");
 
-        // we check whether the value sent corresponds to the article price
+        // check that the price received sent corresponds to the article price
         require(article.price == msg.value, "Value provided does not match price of article");
 
-        // keep buyer's information
+        // store buyer's information
         article.buyer = msg.sender;
 
-        // the buyer can buy the article
+        // transfer the price to the owner
         article.seller.transfer(msg.value);
 
-
-
-       // emit GiveHash()
         // trigger the event
-        emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.description, article.price, article.hashvalue, article.ACL);
+        emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.decryptkey, article.price, article.hashvalue, article.ACL);
 
     }
 
     // fetch the number of articles in the contract
-
-
     function getNumberOfArticles() public view returns (uint) {
         return articleCounter;
     }
 
-    // fetch and returns all article IDs available for sale
+    // fetch and return all article IDs available for sale
     function getArticlesForSale() public view returns (uint[]memory) {
         // we check whether there is at least one article
         if(articleCounter == 0) {
@@ -140,14 +127,11 @@ contract Market is Ownable {
         uint numberOfArticlesForSale = 0;
         // iterate over articles
         for (uint i = 1; i <= articleCounter; i++) {
-            // keep only the ID for the article not already sold
-            //if (articles[i].buyer == address(0)) {
                 articleIds[numberOfArticlesForSale] = articles[i].id;
                 numberOfArticlesForSale++;
-            //}
         }
 
-        // copy the articleIds array into the smaller forSale array
+        // copy the articleIds array into the another array to convert to form to sent to frontend
         uint[] memory forSale = new uint[](articleCounter);
         for (uint j = 0; j < articleCounter; j++) {
             forSale[j] = articleIds[j];
@@ -167,9 +151,9 @@ contract Market is Ownable {
             }
         }
         if (flag == 2) {
-            emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.description, article.price, article.hashvalue, article.ACL);
+            emit LogBuyArticle(_id, article.seller, article.buyer, article.name, article.decryptkey, article.price, article.hashvalue, article.ACL);
         } else {
-            emit LogCheckAccess("Need to purchase first");
+            emit LogNoAccess("Need to purchase first");
         }
         
     }

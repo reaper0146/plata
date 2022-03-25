@@ -404,7 +404,7 @@ a:link {
 
 .panel-title{
     float: left;
-    width: 10%;
+    width: 27%;
 }
 
 .article-price{
@@ -471,7 +471,7 @@ a:link {
 
 .modal-receipt{
 
-    height: 600px;
+    height: 400px;
     width: 450px;
     position: absolute;
     left: 450px;
@@ -482,7 +482,7 @@ a:link {
 
 .modal-buyIt{
 
-    height: 600px;
+    height: 300px;
     width: 650px;
     position: absolute;
     left: 450px;

@@ -120,7 +120,7 @@ App = {
 			};
 
 			// Converting JSON data to string
-			var data = JSON.stringify({ "cid": identifier, "key": de_key});
+			var data = JSON.stringify({ "cid": identifier, "key": key});
             console.log(data)
 
 			// Sending data with the request
@@ -147,34 +147,6 @@ App = {
         $('.btn-unsubscribe').hide();
         $('.btn-show-events').hide();
     },
-
-    /*encryptMessage: async(key) => {
-        let encoded = getMessageEncoding();
-        // counter will be needed for decryption
-        counter = window.crypto.getRandomValues(new Uint8Array(16));
-        console.log(counter)
-        return window.crypto.subtle.encrypt(
-          {
-            name: "AES-CTR",
-            counter,
-            length: 64
-          },
-          key,
-          encoded
-        );
-      },
-
-       decryptMessage: (key, ciphertext) =>{
-        return window.crypto.subtle.decrypt(
-          {
-            name: "AES-CTR",
-            counter,
-            length: 64
-          },
-          key,
-          ciphertext
-        );
-      },*/
 
     sellArticle: async () => {
         const articlePriceValue = parseFloat($('#article_price').val());
@@ -257,25 +229,16 @@ App = {
             ).on("transactionHash", hash => {
                 console.log("transaction hash", hash);
 
-                var number = 0;
-                console.log(number);
-                //console.log(_articleId);
-                //number = _articleId
-                marketInstance.LogBuyArticle({fromBlock: "0", toBlock: 'latest'}).on("data", async function(event) {
-                number++;    
-                console.log(number);
-                console.log(event)
+                marketInstance.LogBuyArticle({fromBlock: "0", toBlock: 'latest'}).on("data", async function(event) { 
                 //console.log(transactionReceipt.receipt);
                 console.log(_articleId);
                 //if (number == _articleId){
                     console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
-                    console.log(event.returnValues._name);
-                    console.log(event.returnValues._seller);
-                    console.log(event.returnValues._description);
+                    console.log(event);
                     await $('#purchaselink').text(event.returnValues._hashvalue);
                     $('#modal-loading').attr('hidden', false);
                     //hash_test = event.returnValues._hashvalue
-                    App.runPython(event.returnValues._hashvalue, event.returnValues._description);
+                    App.runPython(event.returnValues._hashvalue, event.returnValues._decryptkey);
                     App.blurBackground();
 
                 //} else {
@@ -304,40 +267,6 @@ App = {
             $('#modal-receipt').attr('hidden', false);
             App.blurBackground();
 
-
-
-            
-
-
-            
-
-// FOLLOWING CODE OPENS WINDOW (IN WORKS)
-
-
-        /*    print = () => {
-                let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
-                popupWin.document.open();
-                popupWin.document.write(`
-                  <html>
-                    <head>
-                      <title>Here is your passcode</title>
-                     </head>
-                <body>test</body>
-                  </html>`
-                );
-                popupWin.document.close();
-            }
-            function openOther(){
-              //I called Api using service
-               let scope=this;
-               setTimeout(function() { scope.print(); }, 3000);
-            }
-            openOther();
-*/
-        //   App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: '0'}).on("data", event => {
-        //  console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
-       // })
-           // console.log(marketInstance.Article.hashvalue);
         } catch(error) {
             console.error(error);
             $('#modal-loading').attr('hidden', true);
@@ -350,6 +279,7 @@ App = {
     getArticle: async () => {
         event.preventDefault();
         var hash_test = 'empty'
+        var decrypt_key = 'empty'
 
         // retrieve the article price
         var _articleId = $(event.target).data('id');
@@ -368,46 +298,22 @@ App = {
                     gas: 500000
                 }
             ).on("transactionHash", hash => {
-                console.log("transaction hash", hash);
+                //console.log("transaction hash", hash);
 
-                var number = 0;
-                console.log(number);
-                //console.log(_articleId);
-                //number = _articleId
                 marketInstance.LogBuyArticle({fromBlock: "0", toBlock: 'latest'}).on("data", async function(event) {
-                number++;    
-                console.log(number);
-                console.log(event)
-                //console.log(transactionReceipt.receipt);
                 console.log(_articleId);
-                //if (number == _articleId){
-                    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
-                    console.log(event.returnValues._name);
-                    console.log(event.returnValues._seller);
-                    $('#purchaselink').text(event.returnValues._hashvalue);
-                    $('#modal-loading').attr('hidden', false);
-                    hash_test = event.returnValues._hashvalue
-                    App.blurBackground();
 
-                //} else {
-                //    return
-            //    }
+                    console.log(event.returnValues._hashvalue);
+                    console.log(event.returnValues._decryptkey);
+                    console.log(event.returnValues._name);
+                    //console.log(event.returnValues._seller);
+                    //$('#purchaselink').text(event.returnValues._hashvalue);
+                hash_test = event.returnValues._hashvalue;
+                decrypt_key = event.returnValues._decryptkey;
+                $('#modal-loading').attr('hidden', false);
+                App.blurBackground();
                 });                
             });     
-
-            /*    App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: "0" }).on("data", event => {
-                
-               console.log(_articleId);
-               console.log(event.returnValues);
-               
-
-               
-
-                });
-
-            /*    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
-               console.log(event.returnValues._name);
-               console.log(event.returnValues._seller); */
             console.log(hash_test);
             //await App.testfn(hash_test);
             console.log("transaction receipt", transactionReceipt);
@@ -428,7 +334,7 @@ App = {
         }
         else{
             $('#modal-receipt').attr('hidden', false);
-            App.runPython(hash_test);
+            App.runPython(hash_test, decrypt_key);
         }
     },
 
@@ -467,8 +373,7 @@ App = {
         // Retrieve and fill the article template
         var articleTemplate = $('#articleTemplate');
         articleTemplate.find('.panel-title').text(" " + name);
-        //articleTemplate.find('.article-description').text(description);
-        articleTemplate.find('.article-price').text(etherPrice);
+         articleTemplate.find('.article-price').text(etherPrice);
         articleTemplate.find('.btn-buy').attr('data-id', id);
         articleTemplate.find('.btn-buy').attr('data-value', etherPrice);
 

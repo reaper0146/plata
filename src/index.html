@@ -44,23 +44,6 @@
         
           <div class="banner-text">
 
-              
-                <ul>
-                  
-
-                  <nav class="navigation ">
-
-                  <li><a href="home.html">Home</a></li>
-                  <li><a href="myprofile.html">My Profile</a></li>
-                  <li><a href="about.html">About</a></li>
-
-                </nav>
-
-                  
-      
-      
-                </ul>
-
                 <ul2>
 
                   <p1>Connected Account:</p1>
@@ -134,7 +117,7 @@
           <button class="btnblue btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#sellArticle" onclick="App.blurBackground();" >Sell a File</button>
         </div>
         <br/>
-      <pre> Item & Description                             Price(ETH)             Seller                                                                Action</pre>
+      <pre> Item & Description                      Price(ETH)             Seller                                                                Action</pre>
       <br/>
       </div>
       
@@ -195,7 +178,7 @@
               
               <div class="panel-body">
                 <pre class="panel-title" style ="display: inline-block;"></pre>
-                <div class="article-description" style ="display: inline-block;"></div>
+                <!--div class="article-description" style ="display: inline-block;"></div-->
                 <div class="article-price" style ="display: inline-block;"></div>
                 <div class="article-seller" style ="display: inline-block;"></div>
                 <button type="button" style ="display: inline-block;" class="btn btngreen btn-primary btn-success btn-buy" onclick="App.buyArticle(event); return false;">Buy</button>
@@ -312,8 +295,8 @@
     <div id= "modal-purchase">
       <h1> Please buy the file before viewing it!</h1>
       <button type="button" class="btn btn-primary btn-success" data-dismiss="modal" onclick="getLink(); return false;">Get Link</button>
-      <h3 id ="purchaselink" hidden="false"></h2>
-      <h3 id ="testlink"></h2>
+      <!--h3 id ="purchaselink" hidden="false"></h2>
+      <h3 id ="testlink"></h2-->
           <button type="button" class="modal-close" onclick="App.CloseBuyIt();">&times;</button>
     </div>
   </div>
