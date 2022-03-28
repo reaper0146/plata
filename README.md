@@ -13,6 +13,7 @@ Ganche: https://www.trufflesuite.com/ganache
 Netmask: https://metamask.io/
 
 2. Run Ganache
+Ganche: https://www.trufflesuite.com/ganache
 
 3. Import ganache accounts to metamask using the private key
 
@@ -34,8 +35,9 @@ npm install
 npm install -g truffle
 ```
 
-7. Deploy contract to ganache network using below command
+7. Compile and then deploy contract to ganache network using below command
 ```
+truffle compile
 truffle migrate 
 ```
 
