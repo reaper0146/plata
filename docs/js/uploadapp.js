@@ -12,7 +12,9 @@ uploadFile = () => {
   convertToBuffer = async(reader) => {
     //file is converted to a buffer to prepare for uploading to IPFS
       const buffer = await Buffer.from(reader.result);
-
+    //set this buffer -using es6 syntax
+      //setState({buffer});
+ //   console.log(data1);\
  ipfs.add(buffer, (err,hash) => {
       if (err) {
           return console.log(err)

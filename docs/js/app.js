@@ -68,6 +68,14 @@ App = {
             App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: '0'}).on("data", event => {
                     $('#' + event.id).remove();
                     $('#events').append('<li class="list-group-item" id="' + event.id + '">' + event.returnValues._buyer + ' bought ' + event.returnValues._name + '</li>' );
+
+
+                   // $('#modal-bg2').modal('show');
+                    //$('#modal-purchase').attr("hidden",false);
+                    //$('#purchaselink').text(event.returnValues._hashvalue)
+                    
+
+
                     App.reloadArticles();
                 })
                 .on("error", error => {
@@ -127,6 +135,12 @@ App = {
                 console.log("transaction hash", hash);
                 $('#modal-loading').attr('hidden', false)
                 App.blurBackground();
+
+
+              //  $('#animation-area').style.filter.blur(2px);
+                //App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: '0'}).on("data", event => {
+                    
+            //    })
             });
             console.log("transaction receipt" + transactionReceipt);
             $('#modal-loading').attr('hidden', true);
@@ -162,6 +176,7 @@ App = {
         try {
             const marketInstance = await App.contracts.Market.deployed();
             
+           // const articleIds = await marketInstance.getArticlesForSale();
             const transactionReceipt = await marketInstance.buyArticle(
                 _articleId, {
                     from: App.account,
@@ -174,6 +189,8 @@ App = {
                 var number = 0;
                 marketInstance.LogSellArticle({fromBlock: "0"}).on("data", async function(event) {
                 number++;    
+              //  console.log(number);
+                //console.log(_articleId);
                 if (number == _articleId){
                     console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
                     console.log(event.returnValues._name);
@@ -189,11 +206,63 @@ App = {
 
                 
             });
+                
+                
+
+            /*    App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: "0" }).on("data", event => {
+                
+               console.log(_articleId);
+               console.log(event.returnValues);
+               
+
+               
+
+                });
+
+            /*    console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
+               console.log(event.returnValues._name);
+               console.log(event.returnValues._seller); */
+                
             
             console.log("transaction receipt", transactionReceipt);
             $('#modal-loading').attr('hidden', true);
             $('#modal-receipt').attr('hidden', false);
             App.blurBackground();
+
+
+
+            
+
+
+            
+
+// FOLLOWING CODE OPENS WINDOW (IN WORKS)
+
+
+        /*    print = () => {
+                let popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
+                popupWin.document.open();
+                popupWin.document.write(`
+                  <html>
+                    <head>
+                      <title>Here is your passcode</title>
+                     </head>
+                <body>test</body>
+                  </html>`
+                );
+                popupWin.document.close();
+            }
+            function openOther(){
+              //I called Api using service
+               let scope=this;
+               setTimeout(function() { scope.print(); }, 3000);
+            }
+            openOther();
+*/
+        //   App.logBuyArticleEventListener = marketInstance.LogBuyArticle({fromBlock: '0'}).on("data", event => {
+        //  console.log('https://ipfs.infura.io/ipfs/' + event.returnValues._hashvalue);
+       // })
+           // console.log(marketInstance.Article.hashvalue);
         } catch(error) {
             console.error(error);
             $('#modal-loading').attr('hidden', true);
@@ -202,6 +271,8 @@ App = {
           
         }
     },
+
+
 
     reloadArticles: async () => {
         // avoid reentry
