@@ -1,6 +1,9 @@
 import io
+import sys
 import pandas as pd
 from Crypto.Cipher import AES
+
+test = sys.argv[1]
 
 #open text file in read mode
 text_file = open("Output.txt", "r")

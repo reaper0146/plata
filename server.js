@@ -25,7 +25,7 @@ app.post('/runPython', async (req,res)=> {
     console.log(decryptKey);
     var url = 'curl -X POST \"https://ipfs.infura.io:5001/api/v0/cat?arg=' + cid+ '\"'
     //console.log(url)
-    const output = execSync(url, { encoding: 'utf-8' });  // the default is 'buffer'
+    const output = execSync(url, { encoding: 'utf-8' });
     decrypted = decryptWithAES(output, decryptKey)
     console.log(decrypted)
       
