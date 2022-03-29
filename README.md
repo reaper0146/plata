@@ -32,7 +32,6 @@ See similar details at https://www.linkedin.com/pulse/using-ganache-ethereum-emu
 ```
 cd plata
 npm install
-npm install -g truffle
 ```
 
 7. Compile and then deploy contract to ganache network using below command
