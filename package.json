@@ -12,10 +12,8 @@
   },
   "author": "William Rittmeyer",
   "license": "ISC",
-  "devDependencies": {
-    "lite-server": "^2.3.0"
-  },
   "dependencies": {
+    "lite-server": "^2.3.0",
     "any-promise": "^1.3.0",
     "bindings": "^1.5.0",
     "bl": "^5.0.0",
