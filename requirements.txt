@@ -1,0 +1,3 @@
+--extra-index-url https://test.pypi.org/simple/
+gvmkit-build==0.2.6
+yapapi==0.7.0
