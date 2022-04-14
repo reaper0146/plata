@@ -30,7 +30,7 @@ app.post('/runPython', async (req,res)=> {
     console.log(decrypted)
       
     // Write data to 'Output.txt' .
-    fs.writeFile('Output.txt', decrypted, (err) => {
+    fs.writeFile('data/hash.json', decrypted, (err) => {
       
     // In case of a error throw err.
     if (err) throw err;
@@ -38,18 +38,17 @@ app.post('/runPython', async (req,res)=> {
 
     let options = {
         mode: 'text',
-        pythonOptions: ['-u'], // get print results in real-time
+        pythonOptions: ['-u'] // get print results in real-time
           //scriptPath: 'path/to/my/scripts' //If you are having python_test.py script in same folder, then it's optional.
-        args: [cid] //An argument which can be accessed in the script using sys.argv[1]
+        //args: [cid] //An argument which can be accessed in the script using sys.argv[1]
     };
      
-    PythonShell.run('fetch.py', options, function (err, result){
-          if (err) throw err;
+    PythonShell.run('requestor.py', options, function (err, result){
           // result is an array consisting of messages collected
           //during execution of script.
           console.log('result: ', result.toString());
           //delete the file after it's used
-        fs.unlink('Output.txt', (err) => {
+        fs.unlink('data/hash.json', (err) => {
             if (err) {
             console.error(err)
             return
