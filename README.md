@@ -2,7 +2,8 @@
 
 This is an Ethereum-based DApp using IPFS. With this application users are able to sell and buy files (can be data files) using "ether". The file is stored on the InterPlanetary File Server (IPFS), a decentralized cloud storage platform. The file that is stored on the server is encrypted. Access control has also been added for the files such that once a file is bought it can be accessed again in the future without buying it again. This application also requires the user to use the extenstion Metamask; one can download this extension at that the following site: https://metamask.io/
 
-Youtube: https://youtu.be/SnVOjttbFm4
+Plata video: https://youtu.be/SnVOjttbFm4
+Plata plus Golem: https://www.youtube.com/watch?v=gdRlzyWdEwE
 
 ## For local development of frontend execute the following code:
 
@@ -50,4 +51,8 @@ npm run dev
 localhost:3000/
 ```
 
-10. Refer to video on how it works after it is hosted on localhost
+10. Install and setup Golem by following the link
+```
+https://handbook.golem.network/requestor-tutorials/flash-tutorial-of-requestor-development
+```
+101. Refer to videos on how it works after it is hosted on localhost
