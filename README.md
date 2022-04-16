@@ -7,11 +7,13 @@ Plata plus Golem: https://www.youtube.com/watch?v=gdRlzyWdEwE
 
 ## For local development of frontend execute the following code:
 
+Dependencies: Node 16.10, Golem, Javascript, Python3
+
 1. Download and install Ganache and metamask extension in suitable browser (chrome/firefox)
 
 Ganche: https://www.trufflesuite.com/ganache
 
-Netmask: https://metamask.io/
+Metamask: https://metamask.io/
 
 2. Run Ganache
 Ganche: https://www.trufflesuite.com/ganache
@@ -51,8 +53,13 @@ npm run dev
 localhost:3000/
 ```
 
-10. Install and setup Golem by following the link
+10. Install and setup Golem by following the tutorial in the link
 ```
 https://handbook.golem.network/requestor-tutorials/flash-tutorial-of-requestor-development
 ```
-101. Refer to videos on how it works after it is hosted on localhost
+11. After Golem setup run
+```
+node server
+```
+
+12. Refer to videos on how it works after it is hosted on localhost
